@@ -1,0 +1,129 @@
+.widget {
+  background: var(--surface);
+  border: 1px solid #2a2e36;
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .15s;
+}
+.widget:hover { box-shadow: 0 4px 20px rgba(0, 0, 0, .35); }
+
+.widget__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid #2a2e36;
+}
+.widget__title { margin: 0; font-size: 1rem; font-weight: 600; }
+
+.widget__actions { display: flex; gap: 6px; }
+.widget__btn {
+  width: 28px; height: 28px;
+  border: none; border-radius: 6px;
+  background: transparent; color: var(--muted);
+  cursor: pointer; font-size: 1rem; line-height: 1;
+}
+.widget__btn:hover { background: #333842; color: var(--text); }
+.widget__btn:focus-visible { outline: 2px solid var(--accent); }
+
+.widget__body { padding: 16px; }
+.widget--minimized .widget__body { display: none; }
+
+.widget[data-state="loading"] .widget__body { opacity: .6; }
+.widget[data-state="error"] { border-color: var(--danger); }
+.widget[data-state="empty"] .book-search__status,
+.widget[data-state="error"] .book-search__status,
+.widget[data-state="error"] .book-of-day__status {
+  color: var(--danger);
+}
+
+/* ToDo */
+.todo__form { display: flex; gap: 8px; margin-bottom: 12px; }
+.todo__input {
+  flex: 1; padding: 8px 10px;
+  background: var(--surface-2); border: 1px solid #3a3f48;
+  border-radius: 8px; color: var(--text); font: inherit;
+}
+.todo__input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.todo__add {
+  padding: 8px 14px; border: none; border-radius: 8px;
+  background: var(--accent); color: #1a1d23; font-weight: 600; cursor: pointer;
+}
+.todo__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.todo__item {
+  display: flex; gap: 8px; align-items: center;
+  padding: 8px 10px; background: var(--surface-2); border-radius: 8px;
+}
+.todo__item--done .todo__text { text-decoration: line-through; color: var(--muted); }
+.todo__text { flex: 1; }
+.todo__toggle, .todo__remove {
+  border: none; background: transparent; color: var(--muted);
+  cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 6px;
+}
+.todo__toggle:hover { color: var(--accent); }
+.todo__remove:hover { color: var(--danger); }
+.todo__empty { color: var(--muted); font-style: italic; }
+
+/* Quote */
+.quote { display: grid; gap: 10px; }
+.quote__text { margin: 0; font-size: 1.05rem; font-style: italic; }
+.quote__author { color: var(--muted); font-size: .9rem; }
+.quote__refresh {
+  justify-self: start; padding: 6px 12px;
+  border: 1px solid #3a3f48; border-radius: 8px;
+  background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+
+/* BookSearch */
+.book-search__form { display: flex; gap: 8px; margin-bottom: 12px; }
+.book-search__input {
+  flex: 1; padding: 8px 10px;
+  background: var(--surface-2); border: 1px solid #3a3f48;
+  border-radius: 8px; color: var(--text); font: inherit;
+}
+.book-search__submit {
+  padding: 8px 14px; border: none; border-radius: 8px;
+  background: var(--accent); color: #1a1d23; font-weight: 600; cursor: pointer;
+}
+.book-search__status { min-height: 1.2em; color: var(--muted); font-size: .9rem; margin-bottom: 8px; }
+.book-search__results { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-height: 340px; overflow-y: auto; }
+.book-search__item { display: flex; gap: 10px; align-items: flex-start; }
+.book-search__cover { width: 40px; height: 60px; object-fit: cover; border-radius: 4px; background: #2a2e36; }
+.book-search__cover--placeholder { background: linear-gradient(135deg, #2a2e36, #333842); }
+.book-search__title { margin: 0; font-weight: 600; font-size: .95rem; }
+.book-search__author, .book-search__year { margin: 0; color: var(--muted); font-size: .85rem; }
+
+/* BookOfDay */
+.book-of-day { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.book-of-day__card { display: grid; gap: 6px; justify-items: center; }
+.book-of-day__cover { width: 120px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.book-of-day__title { margin: 6px 0 0; font-size: 1.05rem; }
+.book-of-day__authors, .book-of-day__meta { margin: 0; color: var(--muted); font-size: .9rem; }
+.book-of-day__refresh {
+  padding: 6px 12px; border: 1px solid #3a3f48; border-radius: 8px;
+  background: var(--surface-2); color: var(--text); cursor: pointer;
+}
+.book-of-day__status { color: var(--muted); font-size: .9rem; min-height: 1.2em; }
+
+.widget__header {
+  cursor: grab;
+  user-select: none;
+}
+
+.widget__header:active {
+  cursor: grabbing;
+}
+
+.widget--dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.widget__btn[data-action="up"],
+.widget__btn[data-action="down"] {
+  font-size: 0.85rem;
+}
